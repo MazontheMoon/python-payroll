@@ -2,6 +2,8 @@
 
 # Define Variables
 
+numberOfEmployees = 5
+counter = 0;
 employeeName = ""
 hoursWorked = 0
 rateOfPay = 0.0
@@ -11,43 +13,54 @@ taxPaid = 0
 nettPay = 0
 bonus = 0
 
-# Get User Input
+# Display Greeting
+print("+++++++++++++++++++++++++++++++")
+print("\tEmployee Payroll")
+print("+++++++++++++++++++++++++++++++\n")
 
-employeeName = input("Enter employee name: ")
-hoursWorked = int(input("Enter number of hours worked: "))
-rateOfPay = float(input("Enter rate of pay: €"))
-rateOfTax = float(input("Enter rate of tax (0.1 for 10%, 0.2 for 20%, etc.: "))
+# Loop through all employees
+while(counter < numberOfEmployees):
 
-# Calculate Base Pay
+    # Get User Input
 
-grossPay = hoursWorked * rateOfPay
-taxPaid = grossPay * rateOfTax
-nettPay = grossPay - taxPaid
+    employeeName = input("Enter Employee Name: ")
+    hoursWorked = int(input("Enter Number of Hours Worked: "))
+    rateOfPay = float(input("Enter Rate of Pay: €"))
+    rateOfTax = float(input("Enter Rate of Tax(%): ")) / 100
 
-# Calculate Bonus
+    # Calculate Base Pay
 
-if hoursWorked >= 50:
-    bonus = 100
-elif hoursWorked >= 45:
-    bonus = 60
-elif hoursWorked >= 40:
-    bonus = 50
-else:
-    bonus = 0
+    grossPay = hoursWorked * rateOfPay
+    taxPaid = grossPay * rateOfTax
+    nettPay = grossPay - taxPaid
 
-nettPay += bonus
+    # Calculate Bonus
 
-# Display Payroll
+    if hoursWorked >= 50:
+        bonus = 100
+    elif hoursWorked >= 45:
+        bonus = 60
+    elif hoursWorked >= 40:
+        bonus = 50
+    else:
+        bonus = 0
 
-print("++++++++++++++++++++++++")
-print("Employee Payroll")
-print("++++++++++++++++++++++++")
-print("Employee: \t" + employeeName)
-print("Hours Worked:  \t" + str(hoursWorked))
-print("Rate of Pay: \t€" + str(rateOfPay))
-print("Tax Rate: \t" + str(rateOfTax * 100) + "%")
-print("Gross Pay: \t€" + str(grossPay))
-print("Tax Paid: \t€" + str(taxPaid))
-print("Bonus: \t\t€" + str(taxPaid))
-print("Nett Pay: \t€" + str(nettPay))
-print("++++++++++++++++++++++++")
+    nettPay += bonus
+
+    # Display Payroll
+
+    print("\n+++++++++++++++++++++++++++++++")
+    print("Employee: \t" + employeeName)
+    print("Hours Worked:  \t" + str(hoursWorked))
+    print("Rate of Pay: \t€" + str(rateOfPay))
+    print("Tax Rate: \t" + str(rateOfTax * 100) + "%")
+    print("Gross Pay: \t€" + str(grossPay))
+    print("Tax Paid: \t€" + str(taxPaid))
+    print("Bonus: \t\t€" + str(bonus))
+    print("Nett Pay: \t€" + str(nettPay))
+    print("+++++++++++++++++++++++++++++++\n")
+
+    #Increment counter
+    
+    counter += 1
+

@@ -2,14 +2,21 @@
 
 # Define Variables
 
-employeeName = "Han Solo"
-hoursWorked = 40
-rateOfPay = 10.00
-rateOfTax = 0.2
+employeeName = ""
+hoursWorked = 0
+rateOfPay = 0.0
+rateOfTax = 0.0
 grossPay = 0
 taxPaid = 0
 nettPay = 0
 bonus = 0
+
+# Get User Input
+
+employeeName = input("Enter employee name: ")
+hoursWorked = int(input("Enter number of hours worked: "))
+rateOfPay = float(input("Enter rate of pay: €"))
+rateOfTax = float(input("Enter rate of tax (0.1 for 10%, 0.2 for 20%, etc.: "))
 
 # Calculate Base Pay
 
@@ -44,4 +51,3 @@ print("Tax Paid: \t€" + str(taxPaid))
 print("Bonus: \t\t€" + str(taxPaid))
 print("Nett Pay: \t€" + str(nettPay))
 print("++++++++++++++++++++++++")
-

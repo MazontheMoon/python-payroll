@@ -1,9 +1,9 @@
 # PAYROLL APPLICATION
 
 # Define Variables
-
 numberOfEmployees = 5
 counter = 0;
+payrollList = []
 employeeName = ""
 hoursWorked = 0
 rateOfPay = 0.0
@@ -12,55 +12,101 @@ grossPay = 0
 taxPaid = 0
 nettPay = 0
 bonus = 0
-
+    
 # Display Greeting
-print("+++++++++++++++++++++++++++++++")
-print("\tEmployee Payroll")
-print("+++++++++++++++++++++++++++++++\n")
+def displayWelcome():
+    print("++++++++++++++++++++++++++++++++++++")
+    print("Welcome to Employee Payroll")
+    print("++++++++++++++++++++++++++++++++++++\n")
 
-# Loop through all employees
-while(counter < numberOfEmployees):
-
-    # Get User Input
-
+# Get User Input
+def getInput():
     employeeName = input("Enter Employee Name: ")
     hoursWorked = int(input("Enter Number of Hours Worked: "))
     rateOfPay = float(input("Enter Rate of Pay: €"))
     rateOfTax = float(input("Enter Rate of Tax(%): ")) / 100
+    inputList = []
+    inputList.append(employeeName)
+    inputList.append(hoursWorked)
+    inputList.append(rateOfPay)
+    inputList.append(rateOfTax)
+    return inputList
+    
+# Calculate Gross Pay
+def calcGross(hoursWorked, rateOfPay):
+    return hoursWorked * rateOfPay
 
-    # Calculate Base Pay
+# Calculate Tax Paid
+def calcTax(grossPay, rateOfTax):
+    return grossPay * rateOfTax
 
-    grossPay = hoursWorked * rateOfPay
-    taxPaid = grossPay * rateOfTax
-    nettPay = grossPay - taxPaid
+# Calculate Nett Pay
+def calcNett(grossPay, taxPaid):
+    return grossPay - taxPaid
 
-    # Calculate Bonus
-
+# Calculate Bonus
+def calcBonus(hoursWorked):
     if hoursWorked >= 50:
-        bonus = 100
+        return 100.00
     elif hoursWorked >= 45:
-        bonus = 60
+        return 60.00
     elif hoursWorked >= 40:
-        bonus = 50
+        return 50.00
     else:
-        bonus = 0
+        return 0.0
 
+# Caluclate Pay
+def calcPay(payrollList):
+    grossPay = calcGross(payrollList[1], payrollList[2])
+    taxPaid = calcTax(grossPay, payrollList[3])
+    nettPay = calcNett(grossPay, taxPaid)
+    bonus =  calcBonus(payrollList[1])
     nettPay += bonus
+    payrollList.append(grossPay)
+    payrollList.append(taxPaid)
+    payrollList.append(bonus)
+    payrollList.append(nettPay)
+    return payrollList
 
-    # Display Payroll
-
+# Display Payroll
+def displayPayroll(payrollList):
     print("\n+++++++++++++++++++++++++++++++")
-    print("Employee: \t" + employeeName)
-    print("Hours Worked:  \t" + str(hoursWorked))
-    print("Rate of Pay: \t€" + str(rateOfPay))
-    print("Tax Rate: \t" + str(rateOfTax * 100) + "%")
-    print("Gross Pay: \t€" + str(grossPay))
-    print("Tax Paid: \t€" + str(taxPaid))
-    print("Bonus: \t\t€" + str(bonus))
-    print("Nett Pay: \t€" + str(nettPay))
+    print("Employee: \t" + payrollList[0])
+    print("Hours Worked:  \t" + str(payrollList[1]))
+    print("Rate of Pay: \t€" + str(payrollList[2]))
+    print("Tax Rate: \t" + str(payrollList[3] * 100) + "%")
+    print("Gross Pay: \t€" + str(payrollList[4]))
+    print("Tax Paid: \t€" + str(payrollList[5]))
+    print("Bonus: \t\t€" + str(payrollList[6]))
+    print("Nett Pay: \t€" + str(payrollList[7]))
     print("+++++++++++++++++++++++++++++++\n")
 
-    #Increment counter
-    
-    counter += 1
+# Display Exit Message
+def displayExit():
+    print("++++++++++++++++++++++++++++++++++++")
+    print("Thank you for using Employee Payroll")
+    print("++++++++++++++++++++++++++++++++++++\n")
 
+# Main
+displayWelcome()
+
+# Loop through all employees
+while(counter < numberOfEmployees):
+
+    #Prompt for input
+    payrollList += getInput()
+
+    #Calculate wages
+    payrollList += calcPay(payrollList)
+
+    # Display payroll
+    displayPayroll(payrollList)
+
+    #Clear payroll list
+    payrollList.clear()
+
+    # Increment counter
+    counter += 1
+#End Of loop    
+
+displayExit()

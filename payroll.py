@@ -38,7 +38,7 @@ def getValidStringInput(message):
         try:
             value = input(message)
             if value == "" :
-                raise exception
+                raise Exception
             else:
                 return value
         except:
